@@ -11,8 +11,15 @@ L'idée de ce mini framework est de mettre en place un système qui permettra d'
 - L'application est constituée de "composants"
 - Chaque composant hérite de la classe "Component" qui a pour unique méthode createMarkup qui permet de créer des éléments du DOM (HTMLElement)
 - Au départ un tableaux de tâches (tasks) est fourni pour pouvoir créer une première Todolist qui affichera simplement les tâches (title et id) via la méthode render des composants
-- Ensuite, un "service" devra être mis en place (pattern singleton) afin d'emettre des valeurs chaque fois que le tableau "tasks" sera modifié (ajout, suppression, modification)
-- Le composant Todolist s'abonnera à ce service pour recevoir les notifications (next, error, complete) qui renverront le tableau tasks modifier et reconstruira toute l'interfaces (éléments du DOM) à partir de ce nouveau tableau
+- Ensuite, un "service" devra être mis en place (pattern singleton) afin d'emettre des valeurs chaque fois que le tableau "tasks" sera modifié (ajout, suppression, modification).
+  On utilisera pour ce service BehaviorSubject qui :
+  - Stocke la dernière valeur émise
+  - Nécessite une valeur initiale à sa création
+  - renvoie immédiatement aux nouveaux abonnés la dernière valeur émise
+  - donne accès à la valeur courante via getValue()
+- Le composant Todolist 
+  - s'abonnera à ce service pour recevoir les notifications (next, error, complete) qui renverront le tableau tasks modifier et reconstruira toute l'interface (éléments du DOM) à partir de ce nouveau tableau
+  - initialisera le service avec le tableau initialTasks (this.taskService.setTasks(initialTasks);)
 # Intallation initiale
 Cette application a été créée en suivant les étapes suivantes :
 ## 1 créer un répertoire "myApp" par exemple et placez vous sur ce répertoire
