@@ -12,7 +12,7 @@ export default class Task extends Component implements TaskDOMInterface {
     parentElt: HTMLElement = document.getElementById("root") as HTMLElement
   ) {
     super();
-    this.id = Date.now();
+    this.id = id;
     this.title = title;
     this.done = done;
     this.parentElt = parentElt;
